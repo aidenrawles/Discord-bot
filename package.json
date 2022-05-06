@@ -1,0 +1,26 @@
+{
+  "name": "discordbot-tut",
+  "version": "1.0.0",
+  "description": "rock paper scissors bot",
+  "main": "app.js",
+  "engines": {
+    "node": "16.15.0",
+    "npm": "8.5.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app",
+    "start": "node app"
+  },
+  "author": "Aiden Rawles",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "discord.js": "^13.6.0",
+    "dotenv": "^16.0.0",
+    "querystring": "^0.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
