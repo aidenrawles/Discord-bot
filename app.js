@@ -46,6 +46,7 @@ client.on('messageCreate', message => {
                     .setTitle(`The price of ${message.content.substring(8)} is $${price}`)
                     .setColor('#0099ff');
                 message.channel.send({embeds: [newEmbed]});
+                console.log('Displaying Crypto Price');
             })
             .catch((err) => {
                 console.log(err);
