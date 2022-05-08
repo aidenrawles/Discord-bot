@@ -1,59 +1,36 @@
 require('dotenv').config();
-const querystring = require('querystring');
 const axios = require('axios');
-const { Client, Intents, Interaction, MessageEmbed } = require('discord.js');
+const { Client, Intents, Collection, Interaction, MessageEmbed, GuildInviteManager, GuildBan } = require('discord.js');
+const fs = require('node:fs');
 
-const client = new Client({ 
-    intents: [
-        Intents.FLAGS.GUILDS,
-        Intents.FLAGS.GUILD_MESSAGES
-    ] 
-});
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
-client.on('ready', () => {
-    console.log(`Logged in as ${client.user.tag}`);
+const prefix = '>';
+
+client.commands = new Collection();
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+
+
+for (const file of commandFiles) {
+	const command = require(`./commands/${file}`);
+	// Set a new item in the Collection
+	// With the key as the command name and the value as the exported module
+	client.commands.set(command.name, command);
+}
+
+client.once('ready', () => {
+    console.log(`${client.user.tag} is online!`);
 });
 
 client.on('messageCreate', message => {
-    if (message.content.startsWith('!')) {
-        if (message.content.substring(1) === 'cat') {
-            axios.get(`https://api.thecatapi.com/v1/images/search`)
-            .then((res) => {
-                console.log('Displaying image of cat');
-                message.reply(res.data[0].url);
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-        } else if (message.content.substring(1) === 'image') {
-            axios.get(`https://api.unsplash.com/photos/random/?client_id=${process.env.UNSPLASH_API_KEY}`)
-            .then((res) => {
-                console.log(res.data.urls.regular);
-                message.reply(res.data.urls.regular);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-        } else if (message.content.substring(1, 7) === 'crypto') {
-            axios.get(`https://rest.coinapi.io/v1/assets/${message.content.substring(8)}`, {
-                headers: {
-                    'X-CoinAPI-KEY':`${process.env.COIN_API_KEY}`,
-                },
-            })
-            .then((res) => {
-                let price = +(Math.round(res.data[0].price_usd + "e+2")  + "e-2");
-                const newEmbed = new MessageEmbed()
-                    .setTitle(`The price of ${message.content.substring(8)} is $${price}`)
-                    .setColor('#0099ff');
-                message.channel.send({embeds: [newEmbed]});
-                console.log('Displaying Crypto Price');
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-        }
-    }
-});
+    if (message.author.bot || !message.content.startsWith(prefix)) return;
 
+    const args = message.content.slice(prefix.length).trim().split(/ +/);
+    const command = args.shift().toLowerCase();
+
+    if(!client.commands.has(command)) return;
+
+    client.commands.get(command).execute(message, args);
+});
 
 client.login(process.env.DISCORD_TOKEN);
