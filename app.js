@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { Client, Intents, Collection, Interaction, MessageEmbed, GuildInviteManager, GuildBan } = require('discord.js');
+const { Client, Intents, Collection } = require('discord.js');
 const fs = require('node:fs');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
