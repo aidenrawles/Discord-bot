@@ -1,5 +1,4 @@
 require('dotenv').config();
-const axios = require('axios');
 const { Client, Intents, Collection, Interaction, MessageEmbed, GuildInviteManager, GuildBan } = require('discord.js');
 const fs = require('node:fs');
 
