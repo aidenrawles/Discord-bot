@@ -18,7 +18,7 @@ module.exports = {
             .setTitle(`The price of ${res.data[0].asset_id} is $${price}`)
             .setColor('#0099ff');
             message.reply({ embeds: [newEmbed] });
-            console.log('Displaying Crypto Price');
+            console.log('Displaying Crypto Price!');
         })
         .catch((err) => {
             console.log(err);

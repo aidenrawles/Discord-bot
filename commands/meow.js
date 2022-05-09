@@ -4,7 +4,7 @@ module.exports = {
     name: 'meow',
     description: 'Replies with an image of a cat!',
     execute(message, args){
-        console.log('Displaying image of cat');
+        console.log('Displaying image of cat!');
 		axios.get(`https://api.thecatapi.com/v1/images/search`)
 		.then((res) => {
 			const catImage = res.data[0].url;

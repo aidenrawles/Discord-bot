@@ -9,7 +9,7 @@ module.exports = {
             let memeIndex = (res.data.preview).length - 1;
             let meme = res.data.preview[memeIndex];
             message.reply(meme);
-            console.log(`Displaying meme of ${meme}`);
+            console.log(`Displaying meme of ${meme}!`);
         })
         .catch((err) => {
             console.log(err);
