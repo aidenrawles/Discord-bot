@@ -11,7 +11,7 @@ module.exports = {
         const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
         for (let file of commandFiles) {
             const contents = require(`./${file}`);
-            newEmbed.addField(`${contents.name}`, `${contents.description}`, false);
+            newEmbed.addField(`>${contents.name}`, `${contents.description}`, false);
         }
         message.reply({ embeds: [newEmbed] });
         console.log('Displaying bot commands!')

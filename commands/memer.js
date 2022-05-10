@@ -2,10 +2,10 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = {
     name: 'memer',
-    description: 'Listens for argument for Memer API!',
+    description: 'Listens for argument for Memer API! Include help for list of memer commands.',
     async execute(message, args) {
         if (args[0] == undefined) {
-            message.reply('Please include "/help/" parameter.');
+            message.reply('Please include "help" parameter.');
             return;
         }
 
@@ -14,18 +14,18 @@ module.exports = {
             if (param === 'help') {
                 const newEmbed = new MessageEmbed()
                 .setTitle('List of Commands for MemerAPI!')
-                .setDescription('To make an API call, use prefix "/>/" followed by the command.')
+                .setDescription('To make an API call, use prefix ">" followed by the command.')
                 .addFields(
-                    [name = 'joke', description = 'Replies with a joke', inline = false],
-                    [name = 'pun', description = 'Replies with a pun', inline = false],
-                    [name = 'antijoke', description = 'Replies with an antijoke', inline = false],
-                    [name = 'shower', description = 'Replies with a shower thought', inline = false],
-                    [name = 'quote', description = 'Replies with a quote', inline = false],
-                    [name = 'web', description = 'Replies with a useless website', inline = false],
-                    [name = 'chuck', description = 'Replies with Chuck Norris', inline = false],
-                    [name = 'compliment', description = 'Replies with a compliment', inline = false],
-                    [name = 'truth', description = 'Replies with a truth', inline = false],
-                    [name = 'dare', description = 'Replies with a dare', inline = false]
+                    {name: 'joke', value: 'Replies with a joke', inline: false},
+                    {name: 'pun', value: 'Replies with a pun', inline: false},
+                    {name: 'antijoke', value: 'Replies with an antijoke', inline: false},
+                    {name: 'shower', value: 'Replies with a shower thought', inline: false},
+                    {name: 'quote', value: 'Replies with a quote', inline: false},
+                    {name: 'web', value: 'Replies with a useless website', inline: false},
+                    {name: 'chuck', value: 'Replies with Chuck Norris', inline: false},
+                    {name: 'compliment', value: 'Replies with a compliment', inline: false},
+                    {name: 'truth', value: 'Replies with a truth', inline: false},
+                    {name: 'dare', value: 'Replies with a dare', inline: false},
                 )
                 .setFooter()
                 .setTimestamp();
