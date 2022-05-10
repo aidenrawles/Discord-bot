@@ -7,8 +7,9 @@ module.exports = {
     execute(message, args){
         axios.get(`https://api.unsplash.com/photos/random/?client_id=${process.env.UNSPLASH_API_KEY}`)
         .then((res) => {
-            console.log(`Displaying image of ${res.data.urls.regular}`);
-            message.reply(res.data.urls.regular);
+            let randomImage = res.data.urls.regular;
+            console.log(`Displaying image of ${randomImage}`);
+            message.reply(`Displaying a random image:\n${randomImage}`);
         })
         .catch((err) => {
             console.log(err);

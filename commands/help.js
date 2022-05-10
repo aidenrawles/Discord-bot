@@ -5,11 +5,15 @@ module.exports = {
     name: 'help',
     description: 'Lists bot commands!',
     execute(message, args) {
+        const newEmbed = new MessageEmbed()
+        .setTitle(`PersonalSlave Commands!`)
+        .setColor('#0099ff');
         const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
         for (let file of commandFiles) {
-            file = file.split('.js');
-            message.channel.send(`${file[0]},`);
+            const contents = require(`./${file}`);
+            newEmbed.addField(`${contents.name}`, `${contents.description}`, false);
         }
+        message.reply({ embeds: [newEmbed] });
         console.log('Displaying bot commands!')
     }
 };
