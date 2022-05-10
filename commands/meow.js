@@ -8,7 +8,7 @@ module.exports = {
 		axios.get(`https://api.thecatapi.com/v1/images/search`)
 		.then((res) => {
 			const catImage = res.data[0].url;
-			message.reply(catImage);
+			message.reply(`Displaying image of a cat:\n${catImage}`);
 		})
 		.catch((err) => {
 			console.log(err);

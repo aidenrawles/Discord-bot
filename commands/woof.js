@@ -8,7 +8,7 @@ module.exports = {
 		axios.get(`https://api.thedogapi.com/v1/images/search`)
 		.then((res) => {
 			const dogImage = res.data[0].url;
-			message.reply(dogImage);
+			message.reply(`Displaying image of a dog:\n${dogImage}`);
 		})
 		.catch((err) => {
 			console.log(err);

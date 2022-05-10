@@ -15,19 +15,29 @@ module.exports = {
             } else if (days < 1) {
                 days = 1;
             }
-        } 
+        }
+        
+        if (q === 'help') {
+            message.reply('Usecase: (>weather {location} {days}), maximum of 3 day forecast.');
+            return;
+        } else if (q === undefined) {
+            message.reply('Please enter a valid location!');
+            return;
+        }
+
         axios.get(`http://api.weatherapi.com/v1/forecast.json?key=${process.env.WEATHER_API_KEY}&q=${q}&days=${days}&aqi=no&alerts=no`)
         .then((res) => {
             const newEmbed = new MessageEmbed()
             .setTitle(`Weather Forecast in ${q} For The Next ${days} Day(s).`)
             .setColor('#0099ff');
-            message.reply({ embeds: [newEmbed] });
 
             for (let index = 0; index < days; index++) {
                 let forecastWeather = res.data.forecast.forecastday[index].day.condition.text;
-                message.channel.send(`${res.data.forecast.forecastday[index].date} | ${q} forecast is ${forecastWeather}.`);
+                let forecastDate = res.data.forecast.forecastday[index].date;
+                newEmbed.addField(`${forecastDate}`, `${forecastWeather}`, true);
             }
 
+            message.reply({ embeds: [newEmbed] });
             console.log(`Displaying Weather Forecast in ${q} for the next ${days} day(s)!`);
         })
         .catch((err) => {

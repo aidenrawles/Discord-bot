@@ -8,7 +8,7 @@ module.exports = {
         .then((res) => {
             let memeIndex = (res.data.preview).length - 1;
             let meme = res.data.preview[memeIndex];
-            message.reply(meme);
+            message.reply(`Displaying meme:\n ${meme}`);
             console.log(`Displaying meme of ${meme}!`);
         })
         .catch((err) => {
