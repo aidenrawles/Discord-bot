@@ -20,6 +20,9 @@ module.exports = {
         if (q === 'help') {
             message.reply('Usecase: (>weather {location} {days}), maximum of 3 day forecast.');
             return;
+        } else if (q === undefined) {
+            message.reply('Please enter a valid location!');
+            return;
         }
 
         axios.get(`http://api.weatherapi.com/v1/forecast.json?key=${process.env.WEATHER_API_KEY}&q=${q}&days=${days}&aqi=no&alerts=no`)

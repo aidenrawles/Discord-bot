@@ -15,6 +15,7 @@ module.exports = {
                 const newEmbed = new MessageEmbed()
                 .setTitle('List of Commands for MemerAPI!')
                 .setDescription('To make an API call, use prefix ">" followed by the command.')
+                .setColor('#0099ff')
                 .addFields(
                     {name: 'joke', value: 'Replies with a joke', inline: false},
                     {name: 'pun', value: 'Replies with a pun', inline: false},
@@ -26,9 +27,7 @@ module.exports = {
                     {name: 'compliment', value: 'Replies with a compliment', inline: false},
                     {name: 'truth', value: 'Replies with a truth', inline: false},
                     {name: 'dare', value: 'Replies with a dare', inline: false},
-                )
-                .setFooter()
-                .setTimestamp();
+                );
                 message.reply({ embeds: [newEmbed] });
             }
 
