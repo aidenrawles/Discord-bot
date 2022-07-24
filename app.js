@@ -24,6 +24,8 @@ client.once('ready', () => {
 client.on('messageCreate', message => {
     if (message.author.bot || !message.content.startsWith(prefix)) return;
 
+    if (message.webhookId !== null) message.channel.send('<@271949793373192193> Trade Executed!');
+
     const args = message.content.slice(prefix.length).trim().split(/ +/);
     const command = args.shift().toLowerCase();
 
